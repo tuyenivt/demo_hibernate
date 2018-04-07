@@ -1,5 +1,7 @@
 package com.coloza.sample;
 
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -35,5 +37,21 @@ public class MainApplication {
             sessionFactory.close();
         }
         return student;
+    }
+
+    public List<Student> queryStudent(String firstName) {
+        SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml")
+                .addAnnotatedClass(Student.class).buildSessionFactory();
+        Session session = sessionFactory.getCurrentSession();
+        List<Student> students = null;
+        try {
+            session.beginTransaction();
+            students = session.createQuery("from Student where firstName like :firstName", Student.class)
+                    .setParameter("firstName", "%" + firstName + "%").getResultList();
+            session.getTransaction().commit();
+        } finally {
+            sessionFactory.close();
+        }
+        return students;
     }
 }
