@@ -10,8 +10,10 @@ import com.coloza.sample.entity.Student;
 
 public class MainApplication {
 
+    private static final String HIBERNATE_CONFIG_XML = "hibernate.cfg.xml";
+
     public void createStudent(String firstName, String lastName, String email) {
-        SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml")
+        SessionFactory sessionFactory = new Configuration().configure(HIBERNATE_CONFIG_XML)
                 .addAnnotatedClass(Student.class).buildSessionFactory();
         Session session = sessionFactory.getCurrentSession();
         try {
@@ -25,7 +27,7 @@ public class MainApplication {
     }
 
     public Student readStudent(int studentId) {
-        SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml")
+        SessionFactory sessionFactory = new Configuration().configure(HIBERNATE_CONFIG_XML)
                 .addAnnotatedClass(Student.class).buildSessionFactory();
         Session session = sessionFactory.getCurrentSession();
         Student student = null;
@@ -40,7 +42,7 @@ public class MainApplication {
     }
 
     public List<Student> queryStudent(String firstName) {
-        SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml")
+        SessionFactory sessionFactory = new Configuration().configure(HIBERNATE_CONFIG_XML)
                 .addAnnotatedClass(Student.class).buildSessionFactory();
         Session session = sessionFactory.getCurrentSession();
         List<Student> students = null;
