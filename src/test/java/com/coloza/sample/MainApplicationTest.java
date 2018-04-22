@@ -2,6 +2,7 @@ package com.coloza.sample;
 
 import java.util.List;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import com.coloza.sample.entity.Student;
@@ -9,6 +10,11 @@ import com.coloza.sample.entity.Student;
 public class MainApplicationTest {
 
     private MainApplication app = new MainApplication();
+
+    @Before
+    public void setup() {
+        System.setProperty("hibernate.generate_statistics", "true");
+    }
 
     @Test
     public void testCreateStudent() {
